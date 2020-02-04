@@ -1,0 +1,55 @@
+html, body {
+	margin:0 auto;
+	height:100%;
+	width:100%;
+}
+.loadlogo {
+	position:absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index:20001;
+}
+.loader {
+	position: absolute;
+	margin: auto;
+	top: 50%;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.dot {
+	display: block;
+	position: absolute;
+	width: 10px; 
+	height: 10px;
+	left:calc(50% - 5px);
+	border-radius: 5px;
+	background-color: #5fa2dd;
+	transform-origin: 5px 30px;
+	animation: rotate;
+	animation-iteration-count: infinite;
+	animation-duration: 1.5s;
+}
+@keyframes rotate {
+	from {
+		transform: rotateZ(0deg);
+	}
+	to {
+		transform: rotateZ(359deg);
+	}
+}
+.d2 {
+	animation-delay: 0.1s;
+}
+.d3 {
+	animation-delay: 0.2s;
+}
+.d4 {
+	animation-delay: 0.3s;
+}
+.d5 {
+	animation-delay: 0.4s;
+}
