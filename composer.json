@@ -1,7 +1,7 @@
 {
 	"name": "brunogab/simple-php-mvc-extjs6",
-	"description": "simple php oop mvc with ExtJS 6.2",
-	"type": "project",
+	"description": "Simple PHP MVC with ExtJS 6.2",
+	"type": "library",
 	"license": "GPL",
 	"authors": [
 		{
