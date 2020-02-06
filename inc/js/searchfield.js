@@ -19,8 +19,8 @@ Ext.define('Ext.ux.form.SearchField', {
 		}
 	},
 
-	hasSearch : false,
-	paramName : 'searchtext',
+	hasSearch: false,
+	paramName: 'searchtext',
 
 	initComponent: function() {
 		var me = this,
@@ -28,12 +28,12 @@ Ext.define('Ext.ux.form.SearchField', {
 			proxy;
 
 		me.callParent(arguments);
-		me.on('specialkey', function(f, e){
+		me.on('specialkey', function(f, e) {
 			if (e.getKey() == e.ENTER) {
 				me.onSearchClick();
 			}
 		});
-		
+
 		if (!store || !store.isStore) {
 			store = me.store = Ext.data.StoreManager.lookup(store);
 		}
@@ -46,10 +46,10 @@ Ext.define('Ext.ux.form.SearchField', {
 		proxy.setFilterParam(me.paramName);
 		proxy.encodeFilters = function(filters) {
 			return filters[0].getValue();
-		}
+		};
 	},
 
-	onClearClick : function(){
+	onClearClick: function() {
 		var me = this,
 			activeFilter = me.activeFilter;
 
@@ -62,18 +62,17 @@ Ext.define('Ext.ux.form.SearchField', {
 		}
 	},
 
-	onSearchClick : function(){
+	onSearchClick: function() {
 		var me = this,
-		value = me.getValue();
+			value = me.getValue();
 
 		/** search on Enter modified by Gab */
 		var v = me.getRawValue();
-		if(v.length < 1){
+		if (v.length < 1) {
 			me.onClearClick();
 			return;
 		}
 		/** eof search on Enter modified by Gab */
-
 
 		if (value.length > 0) {
 			// Param name is ignored here since we use custom encoding in the proxy.

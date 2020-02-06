@@ -1,4 +1,5 @@
 <?php
+
 namespace GApp\Controllers;
 
 use \GApp\Lib\Helper\FnTrait;
@@ -19,24 +20,23 @@ final class PdfController
 
 	public function __construct($config, $template, $model)
 	{
-		$this->config   = $config;
+		$this->config = $config;
 		$this->template = $template;
-		$this->model    = $model;
+		$this->model = $model;
 
 		require $this->config['path.pdf'];
 
-		define('FPDF_FONTPATH','font/');
+		define('FPDF_FONTPATH', 'font/');
 		$this->pdf = new \FPDF();
-
 	}
 
 	public function getView()
 	{
 		if (!empty($_GET['docname'])) {
 			$this->getDoc();
-		}else {
+		} else {
 			$this->config['viewpage'] = 'home';
-			$this->template->template_render($this->config['path.views'] . "/main.php", $this->config);
+			$this->template->template_render($this->config['path.views'] . '/main.php', $this->config);
 		}
 	}
 
@@ -45,9 +45,8 @@ final class PdfController
 		$docname = $this->validate($_GET)->with('string')->get('docname');
 
 		$this->pdf->AddPage();
-		$this->pdf->SetFont('Arial','B',16);
-		$this->pdf->Cell(40,10,'Hello World! Created via FPDF');
-		$this->pdf->Output($docname,'D');
+		$this->pdf->SetFont('Arial', 'B', 16);
+		$this->pdf->Cell(40, 10, 'Hello World! Created via FPDF');
+		$this->pdf->Output($docname, 'D');
 	}
-
 }

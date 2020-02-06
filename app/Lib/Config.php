@@ -1,11 +1,12 @@
-<?php 
+<?php
+
 namespace GApp\Lib;
 
 /**
  * class Config
  */
-final class Config {
-
+final class Config
+{
 	private $directory;
 
 	public function __construct($path)
@@ -16,10 +17,10 @@ final class Config {
 	/** read all config stuff into one assoc. array */
 	public function getConfig()
 	{
-		$config				= $this->get('site');
-		$config['app_menu']	= $this->get('menu');
-		$config['datatype']	= $this->get('datatype');
-		
+		$config = $this->get('site');
+		$config['app_menu'] = $this->get('menu');
+		$config['datatype'] = $this->get('datatype');
+
 		return $config;
 	}
 
@@ -28,5 +29,4 @@ final class Config {
 	{
 		return require $this->directory . '/' . strtolower($file) . '.php';
 	}
-
 }

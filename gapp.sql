@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `uprv`;
 CREATE TABLE IF NOT EXISTS `uprv` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Ucode` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `Pname` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `Pvalue` varchar(1) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'N',
-  `CreateDate` datetime DEFAULT NULL,
-  `CreateUcode` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `UpdateDate` datetime DEFAULT NULL,
-  `UpdateUcode` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Ucode` (`Ucode`)
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`Ucode` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+`Pname` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+`Pvalue` varchar(1) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'N',
+`CreateDate` datetime DEFAULT NULL,
+`CreateUcode` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+`UpdateDate` datetime DEFAULT NULL,
+`UpdateUcode` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY `Ucode` (`Ucode`)
 ) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --

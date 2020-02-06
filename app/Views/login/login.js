@@ -1,11 +1,9 @@
-
 /**
  * OnReady
  *
  * =====  Login Window =====
  */
 Ext.onReady(function() {
-	
 	/**
 	 * open login window | \inc\js\login_win.js
 	 */
@@ -15,5 +13,4 @@ Ext.onReady(function() {
 	 * Remove the class=loadlogo property, extjs defer | \inc\js\common_fn.js
 	 */
 	hideMask();
-	
 });

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace GApp\Lib\Helper;
 
 /**
@@ -6,8 +7,7 @@ namespace GApp\Lib\Helper;
  */
 trait ResponseTrait
 {
-
-	private function response($fn, $param='')
+	private function response($fn, $param = '')
 	{
 		return $this->$fn($param);
 	}
@@ -15,41 +15,39 @@ trait ResponseTrait
 	/**
 	 * error response
 	 */
-	private function error($text) 
+	private function error($text)
 	{
-		if ($_SERVER['REQUEST_METHOD']==='POST') {
-
-			return print('{"success": false, "info": "'.trim($text).'"}');
-
-		}else{
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			return print('{"success": false, "info": "' . trim($text) . '"}');
+		} else {
 			/** response a simple HTML error */
 			$text = trim($text);
-			return require ($this->config['path.views'] . "/error.php");
-		}	
+			return require $this->config['path.views'] . '/error.php';
+		}
 	}
 
 	/**
 	 * JSON true + info {"success": true, "info": "@text"}
 	 */
-	private function success($text='') 
+	private function success($text = '')
 	{
-		return print('{"success": true, "info": "'.trim($text).'"}');
+		return print('{"success": true, "info": "' . trim($text) . '"}');
 	}
 
 	/**
 	 * htmp response return require($file)
 	 */
-	private function html($file) 
+	private function html($file)
 	{
-		return require ($this->config['path.views'] . "/" . $file);
+		return require $this->config['path.views'] . '/' . $file;
 	}
 
 	/**
 	 * JSON true + data {"success": true, "data": "@text"}
 	 */
-	private function successData($data) 
+	private function successData($data)
 	{
-		return print('{"success": true, "data": '.trim($data).'}');
+		return print('{"success": true, "data": ' . trim($data) . '}');
 	}
 
 	/** --------- JSON TABLE ---------- */
@@ -59,7 +57,7 @@ trait ResponseTrait
 	 */
 	private function successTotal($param) //$nbrows=0, $jsonresult=""
 	{
-		return print('({"total":'.$param[0].', "results":'.trim($param[1]).'})');
+		return print('({"total":' . $param[0] . ', "results":' . trim($param[1]) . '})');
 	}
 
 	/**
@@ -67,7 +65,6 @@ trait ResponseTrait
 	 */
 	private function successTotalEmpty()
 	{
-		return print ('({"total":"0", "results":""})');		
+		return print('({"total":"0", "results":""})');
 	}
-
 }

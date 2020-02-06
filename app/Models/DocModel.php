@@ -1,4 +1,5 @@
 <?php
+
 namespace GApp\Models;
 
 /**
@@ -7,7 +8,7 @@ namespace GApp\Models;
 final class DocModel
 {
 	//private $db;
-	
+
 	public function __construct($mypdo)
 	{
 		//$this->db = $mypdo;
@@ -18,5 +19,4 @@ final class DocModel
 	{
 		//return $this->db;
 	}
-
 }

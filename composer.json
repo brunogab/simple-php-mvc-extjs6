@@ -1,19 +1,19 @@
 {
-    "name": "brunogab/simple-php-mvc-extjs6",
-    "description": "simple php oop mvc with ExtJS 6.2",
-    "type": "project",
-    "license": "GPL",
-    "authors": [
-        {
-            "name": "Gabor Brunner",
-            "email": "brunner.gabor.it@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {},
-    "autoload": {
-        "psr-4": {
-            "GApp\\": "app/"
-        }
-    }
+	"name": "brunogab/simple-php-mvc-extjs6",
+	"description": "simple php oop mvc with ExtJS 6.2",
+	"type": "project",
+	"license": "GPL",
+	"authors": [
+		{
+			"name": "Gabor Brunner",
+			"email": "brunner.gabor.it@gmail.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"GApp\\": "app/"
+		}
+	}
 }

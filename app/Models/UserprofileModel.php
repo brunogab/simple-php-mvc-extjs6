@@ -1,4 +1,5 @@
 <?php
+
 namespace GApp\Models;
 
 /**
@@ -9,10 +10,10 @@ final class UserProfileModel
 	//use FunctionsTrait;
 
 	private $db;
-	
+
 	public function __construct($mypdo)
 	{
-		$this->db = $mypdo; 
+		$this->db = $mypdo;
 	}
 
 	public function getMDB()
@@ -23,7 +24,8 @@ final class UserProfileModel
 	/**
 	 * def data type
 	 */
-	public function getColumnNameDataType(){
+	public function getColumnNameDataType()
+	{
 		return [
 			'id' => 'id',
 			'ucode' => 'string',
@@ -79,7 +81,7 @@ final class UserProfileModel
 			T0.id, T0.Ucode AS 'ucode', T0.Uname AS 'uname', T0.Email AS 'email', '' AS 'pwd',
 			T0.CreateDate AS 'createdate', T0.CreateUcode AS 'createucode', 
 			T0.UpdateDate AS 'updatedate', T0.UpdateUcode AS 'updateucode'
-			FROM users T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin",array(':ucode' => $_SESSION['user_code']));
+			FROM users T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin", [':ucode' => $_SESSION['user_code']]);
 		if (!$query_result) {
 			return false;
 		}
@@ -92,8 +94,10 @@ final class UserProfileModel
 	 */
 	public function checkExistingData($input_data, $table, $column)
 	{
-		$query_result = $this->db->sql_query("SELECT T0.id FROM $table T0 WHERE T0.id <> :id AND LOWER(T0.$column) collate utf8mb4_bin = LOWER(:$column) collate utf8mb4_bin ", 
-												array(':id' => $input_data['id'], ":".$column => $input_data[$column]));
+		$query_result = $this->db->sql_query(
+			"SELECT T0.id FROM $table T0 WHERE T0.id <> :id AND LOWER(T0.$column) collate utf8mb4_bin = LOWER(:$column) collate utf8mb4_bin ",
+			[':id' => $input_data['id'], ':' . $column => $input_data[$column]]
+		);
 		if (!$query_result) {
 			return false;
 		}
@@ -104,25 +108,26 @@ final class UserProfileModel
 	/**
 	 * update form - data
 	 */
-	public function setUserData($input_data)  
+	public function setUserData($input_data)
 	{
-		$query_result = $this->db->sql_query("UPDATE users T0 SET
+		$query_result = $this->db->sql_query(
+			'UPDATE users T0 SET
 																T0.UName		= :uname,
 																T0.Email		= :email,
 																T0.UpdateDate	= :updatedate,
 																T0.UpdateUcode	= :updateucode
-														WHERE T0.id = :id",
-														array(  ':id'			=> $input_data['id'],
-																':uname'		=> $input_data['uname'],
-																':email'		=> $input_data['email'],
-																':updatedate'	=> $input_data['updatedate'],
-																':updateucode'	=> $input_data['updateucode']
-															)
-											);
+														WHERE T0.id = :id',
+			[':id' => $input_data['id'],
+				':uname' => $input_data['uname'],
+				':email' => $input_data['email'],
+				':updatedate' => $input_data['updatedate'],
+				':updateucode' => $input_data['updateucode']
+			]
+		);
 		if (!$query_result) {
 			return false;
 		}
-	 
+
 		return $query_result;
 	}
 
@@ -131,16 +136,17 @@ final class UserProfileModel
 	 */
 	public function setUserPassword($input_data)
 	{
-		$query_result = $this->db->sql_query("UPDATE users T0 SET
+		$query_result = $this->db->sql_query(
+			'UPDATE users T0 SET
 					T0.Pwd			= :pwd,
 					T0.UpdatePwd	= :updatepwd,
 					T0.IsDefPW		= :isdefpw
-			WHERE T0.id = :id", 
-			array(  ':id'			=> $input_data['id'],
-					':pwd'			=> $input_data['pwd'],
-					':updatepwd'	=> $input_data['updatepwd'],
-					':isdefpw'		=> $input_data['isdefpw']
-				)
+			WHERE T0.id = :id',
+			[':id' => $input_data['id'],
+				':pwd' => $input_data['pwd'],
+				':updatepwd' => $input_data['updatepwd'],
+				':isdefpw' => $input_data['isdefpw']
+			]
 		);
 		if (!$query_result) {
 			return false;
@@ -174,7 +180,7 @@ final class UserProfileModel
 		$query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Dtime AS 'dtime', T0.Ucode AS 'ucode', T0.Host AS 'host', T0.HostIp AS 'hostip', T0.Typ AS 'typ'
 												FROM log T0
 												WHERE '0'='0' $query_s
-												ORDER BY $sort $dir LIMIT :start , :end", array(':start' => $start, ':end' => $end));
+												ORDER BY $sort $dir LIMIT :start , :end", [':start' => $start, ':end' => $end]);
 		if (!$query_result) {
 			return false;
 		}
@@ -185,9 +191,9 @@ final class UserProfileModel
 	/**
 	 * select tab 1 table by user
 	 */
-	public function getListingLogUser($ret, $usercode) 
+	public function getListingLogUser($ret, $usercode)
 	{
-		extract($ret); 
+		extract($ret);
 		$query_s = '';
 		if (!empty($searchtext)) {
 			$query_s = " AND    (
@@ -197,16 +203,16 @@ final class UserProfileModel
 								)";
 		}
 
-		$query_nbrows = $this->db->sql_query("SELECT * FROM log T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s", array(':ucode' => $usercode));
+		$query_nbrows = $this->db->sql_query("SELECT * FROM log T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s", [':ucode' => $usercode]);
 		if (!$query_nbrows) {
 			return false;
 		}
 
-$query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Dtime AS 'dtime', T0.Ucode AS 'ucode', T0.Host AS 'host', T0.HostIp AS 'hostip', 
+		$query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Dtime AS 'dtime', T0.Ucode AS 'ucode', T0.Host AS 'host', T0.HostIp AS 'hostip', 
 													case when T0.Typ = 'Y' then 'ok' else 'bad' end as 'typ'
 												FROM log T0
 												WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s
-												ORDER BY $sort $dir LIMIT :start , :end", array(':ucode' => $usercode,':start' => $start, ':end' => $end));
+												ORDER BY $sort $dir LIMIT :start , :end", [':ucode' => $usercode, ':start' => $start, ':end' => $end]);
 		if (!$query_result) {
 			return false;
 		}
@@ -228,7 +234,7 @@ $query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Dtime AS 'dtime',
 								)";
 		}
 
-		$query_nbrows = $this->db->sql_query("SELECT * FROM uprv T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s", array(':ucode' => $usercode));
+		$query_nbrows = $this->db->sql_query("SELECT * FROM uprv T0 WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s", [':ucode' => $usercode]);
 		if (!$query_nbrows) {
 			return false;
 		}
@@ -236,12 +242,11 @@ $query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Dtime AS 'dtime',
 		$query_result = $this->db->sql_query("SELECT T0.id AS 'id', T0.Pname AS 'pname', T0.Pvalue AS 'pvalue'
 												FROM uprv T0
 												WHERE LOWER(T0.Ucode) collate utf8mb4_bin = LOWER(:ucode) collate utf8mb4_bin $query_s
-												ORDER BY $sort $dir LIMIT :start , :end", array(':ucode' => $usercode,':start' => $start, ':end' => $end));
+												ORDER BY $sort $dir LIMIT :start , :end", [':ucode' => $usercode, ':start' => $start, ':end' => $end]);
 		if (!$query_result) {
 			return false;
 		}
 
 		return ['nbrows' => $query_nbrows->rowCount(), 'query_result' => $query_result->fetchAll()];
 	}
-
 }

@@ -1,11 +1,11 @@
 /* Success */
 .msg-success {
-	background-color: #DFF0D8;
-	border: 1px solid #D6E9C6;
+	background-color: #dff0d8;
+	border: 1px solid #d6e9c6;
 	padding: 10px 15px;
 }
 .msg-success h3 {
-	color:#468847;
+	color: #468847;
 	margin: 0;
 	font-weight: bold;
 	font-size: 14px;
@@ -16,12 +16,12 @@
 
 /* Warning */
 .msg-warning {
-	background-color: #FCF8E3;
-	border: 1px solid #FBEED5;
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
 	padding: 10px 15px;
 }
 .msg-warning h3 {
-	color:#C09853;
+	color: #c09853;
 	margin: 0;
 	font-weight: bold;
 	font-size: 14px;
@@ -32,12 +32,12 @@
 
 /* Error */
 .msg-error {
-	background-color: #F2DEDE;
-	border: 1px solid #EED3D7;
+	background-color: #f2dede;
+	border: 1px solid #eed3d7;
 	padding: 10px 15px;
 }
 .msg-error h3 {
-	color:#B94A48;
+	color: #b94a48;
 	margin: 0;
 	font-weight: bold;
 	font-size: 14px;
@@ -48,12 +48,12 @@
 
 /* Info */
 .msg-info {
-	background-color: #D9EDF7;
-	border: 1px solid #BCE8F1; 
+	background-color: #d9edf7;
+	border: 1px solid #bce8f1;
 	padding: 10px 15px;
 }
 .msg-info h3 {
-	color:#3A87AD;
+	color: #3a87ad;
 	margin: 0;
 	font-weight: bold;
 	font-size: 14px;

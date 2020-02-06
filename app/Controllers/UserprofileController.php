@@ -1,4 +1,5 @@
 <?php
+
 namespace GApp\Controllers;
 
 use \GApp\Lib\Helper\FnTrait;
@@ -17,15 +18,15 @@ final class UserProfileController
 
 	public function __construct($config, $template, $model)
 	{
-		$this->config	= $config;
-		$this->template	= $template;
-		$this->model	= $model;
+		$this->config = $config;
+		$this->template = $template;
+		$this->model = $model;
 	}
 
 	public function getView()
 	{
 		$this->config['viewpage'] = 'userprofile';
-		$this->template->template_render($this->config['path.views'] . "/main.php", $this->config);
+		$this->template->template_render($this->config['path.views'] . '/main.php', $this->config);
 	}
 
 	/**
@@ -45,14 +46,14 @@ final class UserProfileController
 	{
 		$query_result = $this->model->getListing();
 		if (!$query_result) {
-			return $this->response('error', $this->model->getMDB()->getMsg()); 
+			return $this->response('error', $this->model->getMDB()->getMsg());
 		}
-		
-		$jsonresult = json_encode($query_result); 
-		$jsonresult = str_replace(array('[',']'),'',$jsonresult); 
+
+		$jsonresult = json_encode($query_result);
+		$jsonresult = str_replace(['[', ']'], '', $jsonresult);
 
 		if (empty($jsonresult)) {
-			return $this->response('error', 'result is empty!'); 
+			return $this->response('error', 'result is empty!');
 		}
 
 		return $this->response('successData', $jsonresult);
@@ -77,7 +78,7 @@ final class UserProfileController
 		]);*/
 
 		/**
-		 * get Column Info 
+		 * get Column Info
 		 */
 		$column_info = $this->model->getColumnNameDataType();
 
@@ -89,31 +90,31 @@ final class UserProfileController
 		/**
 		 * add some another data or format
 		 */
-		$input_data['updatedate']   = $this->fn('now');
-		$input_data['updateucode']  = $_SESSION['user_code'];
-		$input_data['updatepwd']    = $this->fn('now');
+		$input_data['updatedate'] = $this->fn('now');
+		$input_data['updateucode'] = $_SESSION['user_code'];
+		$input_data['updatepwd'] = $this->fn('now');
 
 		/**
 		 * check for null data, following colummns in array will be checked
 		 */
-		$notnull_col = ['id','uname','email'];
+		$notnull_col = ['id', 'uname', 'email'];
 		foreach ($notnull_col as $key) {
 			if (empty($input_data[$key])) {
-				return $this->response('error', 'Could not get or not valid: ('.$key.')');
+				return $this->response('error', 'Could not get or not valid: (' . $key . ')');
 			}
 		}
 
 		/**
 		 * check for existing data, following colummns in array will by checked
 		 */
-		$check_col= ['uname','email'];
+		$check_col = ['uname', 'email'];
 		foreach ($check_col as $key) {
 			$query_result = $this->model->checkExistingData($input_data, 'users', $key);
 			if (!$query_result) {
 				return $this->response('error', $this->model->getMDB()->getMsg());
 			}
-			if ($query_result['count'] > 0){
-				return $this->response('error', 'It already exists: <b>'.$input_data[$key].'</b>');
+			if ($query_result['count'] > 0) {
+				return $this->response('error', 'It already exists: <b>' . $input_data[$key] . '</b>');
 			}
 		}
 
@@ -122,14 +123,13 @@ final class UserProfileController
 		 */
 		$info = '';
 		if (!empty($input_data['pwd'])) {
-			
 			$valid_password = $this->fn('validPassword', $input_data['pwd']);
 			if (!$valid_password) {
-				return $this->response('error', $this->fn('getMsg')); 
+				return $this->response('error', $this->fn('getMsg'));
 			}
 			$input_data['pwd'] = $this->fn('hashPassword', $input_data['pwd']);
 			if (!$input_data['pwd']) {
-				return $this->response('error', $this->fn('getMsg')); 
+				return $this->response('error', $this->fn('getMsg'));
 			}
 
 			$input_data['isdefpw'] = 'N';
@@ -140,8 +140,7 @@ final class UserProfileController
 			$info = 'Password has been saved!';
 			/** refresh session data */
 			$_SESSION['user_updatepwd'] = $this->fn('now');
-			$_SESSION['user_isdefpw']   = false;
-	
+			$_SESSION['user_isdefpw'] = false;
 		}
 
 		$query_result = $this->model->setUserData($input_data);
@@ -155,7 +154,6 @@ final class UserProfileController
 
 		return $this->response('success', $info);
 	}
-
 
 	/**
 	 * Tab 1 table read
@@ -171,24 +169,23 @@ final class UserProfileController
 		/**
 		 * get POST or GET data for Query @start, @end, @sort, @dir, @searchtext
 		 */
-		$input_data = $this->fn('getParamsforGridQuery', [$_POST, $column_info]); 
-
+		$input_data = $this->fn('getParamsforGridQuery', [$_POST, $column_info]);
 
 		if ($_SESSION['user_is_superu']) {
 			$query_result = $this->model->getListingLogAll($input_data);
-		}else {
+		} else {
 			$query_result = $this->model->getListingLogUser($input_data, $_SESSION['user_code']);
 		}
 		if (!$query_result) {
 			return $this->response('error', $this->model->getMDB()->getMsg());
 		}
-		
+
 		$nbrows = $query_result['nbrows'];
 
-		if ($nbrows>0) {
+		if ($nbrows > 0) {
 			$jsonresult = json_encode($query_result['query_result']);
 			return $this->response('successTotal', [$nbrows, $jsonresult]);
-		}else {
+		} else {
 			return $this->response('successTotalEmpty');
 		}
 
@@ -204,7 +201,7 @@ final class UserProfileController
 		 * get Column Info
 		 */
 		$column_info = $this->model->getColumnNameDataType();
-		$column_info = array_merge($column_info,$this->config['datatype']);
+		$column_info = array_merge($column_info, $this->config['datatype']);
 
 		/**
 		 * get POST or GET data for Query @start, @end, @sort, @dir, @searchtext
@@ -215,17 +212,16 @@ final class UserProfileController
 		if (!$query_result) {
 			return $this->response('error', $this->model->getMDB()->getMsg());
 		}
-		
+
 		$nbrows = $query_result['nbrows'];
 
-		if ($nbrows>0) {
+		if ($nbrows > 0) {
 			$jsonresult = json_encode($query_result['query_result']);
 			return $this->response('successTotal', [$nbrows, $jsonresult]);
-		}else {
+		} else {
 			return $this->response('successTotalEmpty');
 		}
 
 		return;
 	}
-
 }
