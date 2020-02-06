@@ -2,7 +2,7 @@
 	"name": "brunogab/simple-php-mvc-extjs6",
 	"description": "Simple PHP MVC with ExtJS 6.2",
 	"type": "library",
-	"license": "MTI",
+	"license": "GNU",
 	"authors": [
 		{
 			"name": "Gabor Brunner",
