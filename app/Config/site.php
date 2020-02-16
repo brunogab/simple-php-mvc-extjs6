@@ -44,5 +44,5 @@ return [
 	'path.downloads' => './inc/downloads',
 
 	'path.extjs' => './vendor/ext-6.2.0.981',
-	'path.pdf' => './vendor/fpdf181/fpdf.php',
+	'path.pdf' => './vendor/fpdf182/fpdf.php',
 ];
