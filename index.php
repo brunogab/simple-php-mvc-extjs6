@@ -6,10 +6,7 @@
  *
  * Copyright (C) 2019 Gabor Brunner <brunner.gabor.it@gmail.com>
  * Version: 1.0
- * License: GPL3
- *
- * This program comes with ABSOLUTELY NO WARRANTY;
- * This is free software, and you are welcome to redistribute it.
+ * License: MIT
  *
  * EXTJS
  * https://www.sencha.com/legal/gpl/
