@@ -17,8 +17,7 @@ Sites: login, home and userprofile.
 
 tested on `opensuse leap15.1` and `windows-wamp`
 
-screenshots:
-
+### Screenshots:
 ![Screenshot_2020-02-23 Example - Tool](https://user-images.githubusercontent.com/55801234/75115142-46060100-565c-11ea-9f1f-da9ebbc0ae6f.png)
 
 ![Screenshot_2020-02-23 Example - Tool(5)](https://user-images.githubusercontent.com/55801234/75115267-10154c80-565d-11ea-97f9-c37fb360542c.png)
